@@ -23,7 +23,11 @@ public class MainActivity extends AppCompatActivity {
     private Button showAnswer;
     private TextView resultDesk;
 
+
     ArrayList<String> finish = new ArrayList<>(); // здесь бы его заполнить
+
+
+
 
 
     private Question[] questions = new Question[]{
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (questions[questionIndex].isAnswerTrue()) {
                     Toast.makeText(MainActivity.this, R.string.correct, Toast.LENGTH_SHORT).show();
+
                     finish.add(questionIndex, "Правильно");
                 } else {
                     Toast.makeText(MainActivity.this, R.string.incorrect, Toast.LENGTH_SHORT).show();
@@ -66,7 +71,18 @@ public class MainActivity extends AppCompatActivity {
                 if (questionIndex == questions.length - 1) {
                     Intent intent = new Intent(MainActivity.this, ActivityEnd.class);
                     intent.putExtra("answer", finish);
-                    //а здесь вывести
+                   
+
+                    endResult += "Правильно \n";
+                } else {
+                    Toast.makeText(MainActivity.this, R.string.incorrect, Toast.LENGTH_SHORT).show();
+                    endResult += "Неправильно \n";
+                }
+                if (questionIndex == questions.length - 1) {
+                    Intent intent = new Intent(MainActivity.this, ActivityEnd.class);
+                    intent.putExtra("answer", endResult); // Вы отдаёте по ключу answer
+
+
 
                     startActivity(intent);
                 } else if (questionIndex < questions.length - 1) {
@@ -83,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (questions[questionIndex].isAnswerTrue()) {
                     Toast.makeText(MainActivity.this, R.string.incorrect, Toast.LENGTH_SHORT).show();
+
                     finish.add(questionIndex, "Неправильно");
                 } else {
                     Toast.makeText(MainActivity.this, R.string.correct, Toast.LENGTH_SHORT).show();
@@ -91,6 +108,16 @@ public class MainActivity extends AppCompatActivity {
                 if (questionIndex == questions.length - 1) {
                     Intent intent = new Intent(MainActivity.this, ActivityEnd.class);
                     intent.putExtra("answer", finish); //написать код
+
+                    endResult += "Неправильно \n";
+                } else {
+                    Toast.makeText(MainActivity.this, R.string.correct, Toast.LENGTH_SHORT).show();
+                    endResult += "Правильно \n";
+                }
+                if (questionIndex == questions.length - 1) {
+                    Intent intent = new Intent(MainActivity.this, ActivityEnd.class);
+                    intent.putExtra("answer", endResult);
+
                     startActivity(intent);
                 } else if (questionIndex < questions.length - 1) {
 
